@@ -294,13 +294,6 @@ int main()
 
 				cout << "Enter operator" << endl;
 				cin >> calculation;
-				if (cin.fail())		//Catches input error
-				{
-					cin.clear();
-					cin.ignore(cin.rdbuf()->in_avail());
-					cout << "Not an operator" << endl;
-					break;
-				}
 				cout << "" << endl;
 
 				if (calculation == "+")
@@ -333,6 +326,12 @@ int main()
 					ans = num1 * num2;
 					cout << num1 << " x " << num2 << " = " << ans << endl;
 				}
+				else
+				{
+					cin.clear();
+					cin.ignore(cin.rdbuf()->in_avail());
+					cout << "Not an operator" << endl;	
+				}
 			}
 			break;
 
@@ -355,7 +354,7 @@ int main()
 			case 11:
 			{
 				quit = true;
-				exit(1);
+				exit(0);
 			}
 			break;
 			}
