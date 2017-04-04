@@ -1,0 +1,256 @@
+// ConsoleApplication1.cpp : Defines the entry point for the console application.
+//
+//
+//
+//IMPRTANT LIBRARY GOODIES
+
+#include "stdafx.h"
+
+#include <iostream>
+#include <stdlib.h>
+#include <stdio.h>
+#include <fstream>
+#include <string>
+#include <algorithm>
+#include <vector> 
+#include <cstdlib> //for exit();
+#include "sstream"
+using namespace std;
+
+class Questions {
+public:
+	string qQ;
+	string aA;
+};
+
+void ShowMenu()	//Menu display contents
+{
+	cout << " ____________________________________________ " << endl;
+	cout << "/___________________________________________/|" << endl;
+	cout << "|				            ||" << endl;
+	cout << "|				            ||" << endl;
+	cout << "| ----Press 1 for questions and answers---- ||" << endl;
+	cout << "| ------Press 2 to seach for a word-------- ||" << endl;
+	cout << "| ---------Press 3 to sort array----------- ||" << endl;
+	cout << "| -------Press 4 to copy binary file------- ||" << endl;
+	cout << "| --Press 5 for binary search of an array-- ||" << endl;
+	cout << "| ---Press 7 to create questions object---- || " << endl;
+	cout << "| ----Press 7 or anything else to exit----- ||" << endl;
+	cout << "|				            ||" << endl;
+	cout << "|___________________________________________|/" << endl;
+	cout << "" << endl;
+}
+
+
+int myfunction(int* i, int* j) //pointers for 2d array sort
+{ 
+	return (*i>*j); 
+}
+
+class QuestionObject {
+public:
+	string questions;
+	string answers;
+};
+
+int main()
+{
+	//variable decleration
+	string line;
+	string word;
+	bool quit = false;
+	while (!quit)		//Menu Loop
+	{
+		int loop;
+		ShowMenu();		//initialize menu options display
+		cout << "Please enter a number:";
+		cin >> loop;	//user input for switch decleration
+
+		if (cin.fail())		//handles incorrect input
+		{
+			cout << "Incorrect input, shutting down" << endl;
+			return 0;
+		}
+
+		switch (loop)
+		{
+			case 1:
+			{
+				ifstream myfile("questions.txt");		//open file	
+				cout << "hi" << endl;
+				if (!myfile)		// Prints an error if file is unable to be opened
+				{
+					cerr << "Text file could not be opened for reading!" << endl;
+				}
+
+				if (myfile.is_open())		//displays questions.text line by line
+				{
+					while (getline(myfile, line))		//loop displays every line of the file while it is open
+					{
+						cout << "" << '\n';
+						cout << line << '\n';
+						cout << "" << '\n';
+					}
+				}
+				myfile.close();			//close file
+			}
+			break;
+
+			case 2:		//Searches for a word inside question.txt based on user inputs and displays every line that contains the word//
+			{
+				ifstream myfile("questions.txt");		//open file
+				cout << "" << endl;
+				cout << "Enter a word:" << endl;
+				cin >> word;
+
+				while (myfile)
+				{
+					std::string strInput;
+					getline(myfile, strInput);
+
+					if (strInput.find(word) != std::string::npos)		// searches lines from a file and then prints
+					{
+						std::cout << "" << endl;
+						std::cout << strInput << endl;
+						std::cout << "" << endl;
+					}
+				}
+				myfile.close();			//close file
+			}
+			break;
+
+			case 3:		//Sorts 2d array//
+			{
+				cout << endl;
+				int arr2[4][2];			//initialize 2d array
+				int i, j;
+
+				for (i = 0; i < 4; i++)			//nested for loops generate random numbers for 2d array
+				{
+					for (j = 0; j < 2; j++)
+					{
+						arr2[i][j] = rand() % 10;
+					}
+				}
+
+				cout << "This is a 2D array: " << endl;
+				cout << endl;
+
+				for (i = 0; i < 4; i++)		//outputs 2d array
+				{
+					for (j = 0; j < 2; j++)
+					{
+						cout << arr2[i][j] << "\t";
+					}
+					cout << endl;
+					cout << "" << endl;
+				}
+
+				cout << endl;
+				qsort((void*)arr2, 8, sizeof(int), (int(*)(const void*, const void*))myfunction);	//qsort 2d array	
+				cout << "Sorted 2d array: " << endl;
+				cout << endl;
+
+				for (i = 0; i < 4; i++)			//for-loop  displays sorted array contents
+				{
+					for (j = 0; j < 2; j++)
+						cout << arr2[i][j] << "\t";
+					cout << endl;
+					cout << "" << endl;
+				}
+
+				cout << endl;
+			}
+			break;
+
+			case 4:	//Read and Write binary file//
+			{
+				streampos size;
+				char * memblock;
+				ifstream file("in.bin", ios::in | ios::binary | ios::ate);	//Reads and opens "in.bin" file
+
+				if (file.is_open())
+				{
+					size = file.tellg();
+					memblock = new char[size];
+					file.seekg(0, ios::beg);
+					file.read(memblock, size);		//assigns bin file to memory block
+					cout << "" << endl;
+					cout << "The bin file has been copied to memory" << endl;
+					cout << "" << endl;
+					ofstream myFile("out.bin", ios::out | ios::binary | ios::ate);		//writes a new file: "out.bin"
+					myFile.write(memblock, size);		//writes stored data to "out.bin"
+					file.close();		//closes file
+					cout << "The bin file has been copied and written to a new bin file" << endl;
+					cout << "" << endl;
+				}
+				else cout << "Unable to open file" << endl;
+				delete[] memblock;
+			}
+			break;
+
+			case 5:	//Binary search sorted array//
+			{
+				int arr1[] = { 8,9,3,4,5,32,7,11,1 };
+				sort(begin(arr1), end(arr1));		//sort array
+				int ind;
+
+				for (ind = 0; ind < 9; ind++)		//output sorted array
+				{
+					cout << arr1[ind] << "\t";
+				}
+
+				int user_i;
+				vector<int> vector(arr1, arr1 + 9);		//convert array to vector
+				sort(vector.begin(), vector.end());		//sort vector
+				cout << "" << endl;
+				cout << "Enter a number to search: " << endl;
+				cin >> user_i;		//get user int
+				if (cin.fail())		//binary searches vector for user's desired number {user_i)
+				{
+					cin.clear();
+					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					cout << "Did not find " << user_i << endl;
+				}
+				else
+				{
+					std::binary_search(vector.begin(), vector.end(), user_i);
+					cout << user_i << " Exists!" << endl;
+				}
+				cout << "" << endl;
+			}
+			break;
+
+			case 6:
+			{
+				QuestionObject object1;
+				string qArr[20];
+				ifstream myfile("questions.txt");
+
+				for (int i = 0; i < 20; i++)	//array for text-file-object intergration
+				{
+					getline(myfile, qArr[i]);
+				}
+
+				object1.questions = qArr[0];
+				object1.answers = qArr[1];
+				string test = object1.questions;
+				string test2 = object1.answers;
+				cout << "Question object created" << endl;
+				cout << test << endl;
+				cout << test2 << endl;
+			}
+			break;
+
+			case 7:		//Exit program//
+			{
+				quit = true;
+				exit(1);
+			}
+			break;
+		}
+	}
+	return 0;
+}//end of main
+
+

@@ -1,0 +1,20 @@
+Q1:What is a dynamic variable?
+	A1:Is a User determined and defined variable and differs based on the current user e.g. usernames.
+Q2:What would be considered medium size application development?
+	A2:Third Party Companies.
+Q3:What does a standard array and file handling algorithm look like?
+	A3:arrayNam[x](bits of code).
+Q4:What is a user defined data structure?
+	A4:A user defined data structure is customised data types that a programmer makes.
+Q5:Which one of these two methodologies are real?
+	A5:Spiral + Prototyping.
+Q6:What are the principles of language development?
+	A6:Semantics and syntax.
+Q7:Outline the basic principles of project management:
+	A7:Project structure, definition, clear goals, transparency about project status, risk recognition, managing project disturbances, responsibility of project manager, project success.
+Q8:Describe key features of the software development life cycle (SDLC):
+	A8:Planning, analysis, design, implementation, maintenence.
+Q9:Describe the importance of software specifications:
+	A9: It lays out the functional and non-functional requirements and may include a set of use-cases that describe user interactions that the software must provide.
+Q10: Identify the methods and importance of version control:
+	A10: Allowing users to know when changes have been made and which version of software they are using (1.2.1, Major/Minor Patch).

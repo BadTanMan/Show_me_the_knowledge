@@ -1,0 +1,5 @@
+2.1 Use modular programming approach to coding, including pass-by-reference parameter passing----DONE 
+2.2 Write code to create and manipulate 2-D array -----DONE
+2.3 Create and maintain sorted array and use language-provided facilities for sorting array of ordered elements ---DONE
+2.4 Code simple binary search technique for use with array of sorted data 
+2.5 Code binary file-handling solutions using random-access algorithms
