@@ -16,6 +16,7 @@
 #include <vector> 
 #include <cstdlib>		//for exit();
 #include <sstream>
+#include <limits>
 #include <windows.media.h>		//libraries for music
 #pragma comment (lib, "winmm.lib")		//librarires for music
 
@@ -29,14 +30,15 @@ void ShowMenu()			//Menu display contents
 	cout << "|				            ||" << endl;
 	cout << "| ----Press 1 for questions and answers---- ||" << endl;
 	cout << "| ------Press 2 to seach for a word-------- ||" << endl;
-	cout << "| ---------Press 3 to sort array----------- ||" << endl;
+	cout << "| ----------Press 3 to sort array---------- ||" << endl;
 	cout << "| -------Press 4 to copy binary file------- ||" << endl;
 	cout << "| --Press 5 for binary search of an array-- ||" << endl;
 	cout << "| ---Press 6 to create questions object---- ||" << endl;
 	cout << "| ------Press 7 to change background------- ||" << endl;
 	cout << "| ------Press 8 to access calculator------- ||" << endl;
 	cout << "| ---------Press 9 to play music----------- ||" << endl;
-	cout << "| -----Press 10 or enter char to exit------ ||" << endl;
+	cout << "| ---------Press 10 to stop music---------- ||" << endl;
+	cout << "| -------------Press 11 to exit-------------||" << endl;
 	cout << "|				            ||" << endl;
 	cout << "|___________________________________________|/" << endl;
 	cout << "" << endl;
@@ -53,29 +55,31 @@ public:
 	string questions;
 	string answers;
 };
+bool quit = false;
 
 int main()
 {
 	string line;
-	bool quit = false;
 	bool found;
-	while (!quit)		//Menu Loop
+	while (!quit)		//if quit bool is not false run through the menu options
 	{
+		quit = false; //set quit to false 
 		int loop;
 		ShowMenu();		//initialize menu options display
 		cout << "Please enter a number:";
 		cin >> loop;	//user input for switch decleration
 
-		if (cin.fail())		//handles incorrect input
+		if (cin.fail())		//if user input is incorrect
 		{
-			cin.clear();
-			cin.ignore(cin.rdbuf()->in_avail());
+			cin.clear();	//clear user input
+			cin.ignore(cin.rdbuf()->in_avail());	//ignores user input
 			cout << "Incorrect input!" << endl;
-			bool quit = false;
-			return -1;
+			bool quit = false;	//set quit bool to false and loop back to menu options
 		}
-		switch (loop)
+		else
 		{
+			switch (loop)	//switch the main functions of the program
+			{
 			case 1:
 			{
 				ifstream myFile("questions.txt");		//open file	
@@ -105,6 +109,7 @@ int main()
 				cout << "Enter a word:" << endl;
 				string word;
 				cin >> word;
+				transform(word.begin(), word.end(), word.begin(), ::tolower);
 				while (myFile)
 				{
 					std::string strInput;
@@ -115,6 +120,11 @@ int main()
 						std::cout << "" << endl;
 						std::cout << strInput << endl;
 						std::cout << "" << endl;
+					}
+					else
+					{
+						cin.clear();
+						cin.ignore(cin.rdbuf()->in_avail());
 					}
 				}
 				myFile.close();			//close file
@@ -326,41 +336,29 @@ int main()
 			}
 			break;
 
-			case 9:
+			case 9: 
 			{
-				char triggermusic;
 				PlaySound(TEXT("APM_Adobe_Going Home_v3.wav"), NULL, SND_LOOP | SND_ASYNC);		//Play and loop music
-				cout << "Stop music playing? y/n" << endl;
-				cin >> triggermusic;
-
-				switch (triggermusic)		//input y or n to stop or start music
-				{
-					case 'y':
-					{
-						PlaySound(NULL, 0, 0);
-					}
-					case 'Y':
-					{
-						PlaySound(NULL, 0, 0);
-					}
-					case 'N':
-					{
-						break;
-					}
-					case 'n':
-					{
-						break;
-					}
-				}
+				cout << endl;
+				cout << "Music playing" << endl;
 			}
 			break;
 
 			case 10:
 			{
+				PlaySound(NULL, 0, 0); //stop music
+				cout << endl;
+				cout << "Music stopped" << endl;
+			}
+			break;
+
+			case 11:
+			{
 				quit = true;
 				exit(1);
 			}
 			break;
+			}
 		}
 	}
 	return 0;
