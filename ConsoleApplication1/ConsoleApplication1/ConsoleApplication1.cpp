@@ -36,43 +36,46 @@ void ShowMenu()			//Menu display contents
 	cout << "| ---Press 6 to create questions object---- ||" << endl;
 	cout << "| ------Press 7 to change background------- ||" << endl;
 	cout << "| ------Press 8 to access calculator------- ||" << endl;
-	cout << "| ---------Press 9 to play music----------- ||" << endl;
+	cout << "| ----------Press 9 to play music---------- ||" << endl;
 	cout << "| ---------Press 10 to stop music---------- ||" << endl;
-	cout << "| -------------Press 11 to exit-------------||" << endl;
+	cout << "| ------------Press 11 to exit------------- ||" << endl;
 	cout << "|				            ||" << endl;
 	cout << "|___________________________________________|/" << endl;
-	cout << "" << endl;
+	cout << endl;
 }
 
+void inputcatch()	//this method is used to catch input errors
+{
+	cin.clear();	//clear user input
+	cin.ignore(cin.rdbuf()->in_avail());	//ignores user input
+}
 
-int myfunction(int* i, int* j)		//pointers for 2d array sort
+int pointers(int* i, int* j)		//pointers for 2d array sort
 { 
 	return (*i>*j); 
 }
 
-class QuestionObject {
-public:
-	string questions;
-	string answers;
+class QuestionObject 
+{
+	public:
+		string questions;
+		string answers;
 };
 bool quit = false;
 
 int main()
 {
 	string line;
-	bool found;
 	while (!quit)		//if quit bool is not false run through the menu options
 	{
 		quit = false; //set quit to false 
-		int loop;
 		ShowMenu();		//initialize menu options display
 		cout << "Please enter a number:";
-		cin >> loop;	//user input for switch decleration
-
+		int loop;
+		cin >> loop;
 		if (cin.fail())		//if user input is incorrect
 		{
-			cin.clear();	//clear user input
-			cin.ignore(cin.rdbuf()->in_avail());	//ignores user input
+			inputcatch();
 			cout << "Incorrect input!" << endl;
 			bool quit = false;	//set quit bool to false and loop back to menu options
 		}
@@ -93,9 +96,9 @@ int main()
 				{
 					while (getline(myFile, line))		//loop displays every line of the file while it is open
 					{
-						cout << "" << '\n';
+						cout << endl;
 						cout << line << '\n';
-						cout << "" << '\n';
+						cout << endl;
 					}
 				}
 				myFile.close();			//close file
@@ -105,7 +108,7 @@ int main()
 			case 2:		//Searches for a word inside question.txt based on user inputs and displays every line that contains the word//
 			{
 				ifstream myFile("questions.txt");		//open file
-				cout << "" << endl;
+				cout << endl;
 				cout << "Enter a word:" << endl;
 				string word;
 				cin >> word;
@@ -117,14 +120,13 @@ int main()
 
 					if (strInput.find(word) != std::string::npos)		// searches lines from a file and then prints
 					{
-						std::cout << "" << endl;
-						std::cout << strInput << endl;
-						std::cout << "" << endl;
+						cout << endl;
+						cout << strInput << endl;
+						cout << endl;
 					}
 					else
 					{
-						cin.clear();
-						cin.ignore(cin.rdbuf()->in_avail());
+						inputcatch();
 					}
 				}
 				myFile.close();			//close file
@@ -155,11 +157,11 @@ int main()
 						cout << arr2[i][j] << "\t";
 					}
 					cout << endl;
-					cout << "" << endl;
+					cout << endl;
 				}
 
 				cout << endl;
-				qsort((void*)arr2, 8, sizeof(int), (int(*)(const void*, const void*))myfunction);	//qsort 2d array	
+				qsort((void*)arr2, 8, sizeof(int), (int(*)(const void*, const void*))pointers);	//qsort 2d array	
 				cout << "Sorted 2d array: " << endl;
 				cout << endl;
 
@@ -170,9 +172,8 @@ int main()
 						cout << arr2[i][j] << "\t";
 					}
 					cout << endl;
-					cout << "" << endl;
+					cout << endl;
 				}
-
 				cout << endl;
 			}
 			break;
@@ -182,7 +183,6 @@ int main()
 				streampos size;
 				char * memblock;
 				ifstream file("in.bin", ios::in | ios::binary | ios::ate);		//Reads and opens "in.bin" file
-
 				if (file.is_open())
 				{
 					size = file.tellg();
@@ -208,6 +208,7 @@ int main()
 
 			case 5:									//Binary search sorted array
 			{
+				bool found;
 				int arr1[] = { 8,9,3,4,5,32,7,11,1 };
 				sort(begin(arr1), end(arr1));		//sort array
 				int ind;
@@ -231,8 +232,7 @@ int main()
 				}
 				else		 //ignore input and clears input variable
 				{
-					cin.clear();
-					cin.ignore(cin.rdbuf()->in_avail());
+					inputcatch();
 					cout << "Did not find!" << endl;
 				}
 			}
@@ -276,8 +276,7 @@ int main()
 				cin >> num1;
 				if (cin.fail())		//Catch input error
 				{
-					cin.clear();
-					cin.ignore(cin.rdbuf()->in_avail());
+					inputcatch();
 					cout << "Not a number" << endl;
 					break;
 				}
@@ -286,8 +285,7 @@ int main()
 				cin >> num2;
 				if (cin.fail())		//Catch input error
 				{
-					cin.clear();
-					cin.ignore(cin.rdbuf()->in_avail());
+					inputcatch();
 					cout << "Not a number" << endl;
 					break;
 				}
@@ -328,8 +326,7 @@ int main()
 				}
 				else
 				{
-					cin.clear();
-					cin.ignore(cin.rdbuf()->in_avail());
+					inputcatch();
 					cout << "Not an operator" << endl;	
 				}
 			}

@@ -1,4 +1,4 @@
 ﻿  ConsoleApplication1.cpp
-e:\tafe\monday class - andrew\assignment 1 final\consoleapplication1\consoleapplication1\consoleapplication1\consoleapplication1.cpp(189): warning C4244: 'initializing': conversion from 'std::streamoff' to 'unsigned int', possible loss of data
-  ConsoleApplication1.vcxproj -> E:\Tafe\Monday Class - ANDREW\Assignment 1 FINAL\ConsoleApplication1\ConsoleApplication1\Debug\ConsoleApplication1.exe
-  ConsoleApplication1.vcxproj -> E:\Tafe\Monday Class - ANDREW\Assignment 1 FINAL\ConsoleApplication1\ConsoleApplication1\Debug\ConsoleApplication1.pdb (Full PDB)
+e:\tafe\monday c++  andrew\assignment 1 final\consoleapplication1\consoleapplication1\consoleapplication1\consoleapplication1.cpp(189): warning C4244: 'initializing': conversion from 'std::streamoff' to 'unsigned int', possible loss of data
+  ConsoleApplication1.vcxproj -> E:\Tafe\Monday C++  ANDREW\Assignment 1 FINAL\ConsoleApplication1\ConsoleApplication1\Debug\ConsoleApplication1.exe
+  ConsoleApplication1.vcxproj -> E:\Tafe\Monday C++  ANDREW\Assignment 1 FINAL\ConsoleApplication1\ConsoleApplication1\Debug\ConsoleApplication1.pdb (Full PDB)
